@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0c1219;
+  --accent: #2dd4bf;
+}
+
+@layer base {
+  * {
+    @apply border-white/10;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    @apply bg-ink text-white font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #2dd4bf transparent;
+  }
+
+  html::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5eead4, #2dd4bf 55%, #14b8a6);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::selection {
+    @apply bg-accent text-ink;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1080px] px-4 sm:px-6;
+  }
+
+  .section-y {
+    @apply py-7 lg:py-9;
+  }
+
+  .section-y-tight {
+    @apply py-5 lg:py-7;
+  }
+
+  .section-gap {
+    @apply mt-5 lg:mt-6;
+  }
+
+  .section-stack {
+    @apply flex flex-col gap-5 lg:gap-6;
+  }
+
+  .card-gap {
+    @apply gap-3 lg:gap-3.5;
+  }
+
+  .card-pad {
+    @apply p-4;
+  }
+
+  .heading-display {
+    @apply text-balance text-xl font-semibold leading-[1.22] tracking-tight sm:text-2xl lg:text-[1.85rem];
+  }
+
+  .heading-section {
+    @apply text-balance text-lg font-semibold leading-[1.25] tracking-tight sm:text-xl;
+  }
+
+  .heading-card {
+    @apply text-[13px] font-medium leading-snug tracking-tight text-white sm:text-sm;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-accent px-4 py-2.5
+           text-xs font-semibold tracking-wide text-ink
+           transition-[background-color,box-shadow,color] duration-300 ease-out
+           hover:bg-accent-light hover:shadow-accent
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+           focus-visible:outline-accent active:bg-accent-dark sm:text-sm;
+  }
+
+  .btn-ghost {
+    @apply inline-flex max-w-full items-center justify-center gap-2 rounded-md border border-white/20
+           bg-white/[0.03] px-4 py-2.5 text-xs font-medium tracking-wide text-white
+           transition-[background-color,border-color,color] duration-300 ease-out
+           hover:border-accent hover:bg-accent hover:text-ink
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+           focus-visible:outline-accent sm:text-sm;
+  }
+
+  .glass-card {
+    @apply rounded-xl border border-white/[0.1] bg-ink-700/90 shadow-glass;
+  }
+
+  .panel-card {
+    @apply rounded-xl border border-white/[0.1] border-l-[3px] border-l-accent bg-ink-700/70;
+  }
+
+  .section-label {
+    @apply inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-accent;
+  }
+
+  .field-input {
+    @apply w-full bg-transparent py-3.5 text-sm font-medium text-white outline-none
+           placeholder:text-white/30;
+  }
+
+  .grid-lines {
+    background-image: linear-gradient(rgba(45, 212, 191, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45, 212, 191, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scroll-nested {
+    @apply overflow-y-auto overscroll-contain;
+  }
+}
