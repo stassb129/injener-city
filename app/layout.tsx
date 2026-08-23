@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next'
-import { Manrope } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { LeadModalProvider } from '@/components/LeadModal'
@@ -7,13 +6,6 @@ import CustomCursor from '@/components/CustomCursor'
 import SmoothScroll from '@/components/SmoothScroll'
 import ScrollProgress from '@/components/ScrollProgress'
 import './globals.css'
-
-const manrope = Manrope({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  display: 'swap',
-  variable: '--font-outfit',
-})
 
 export const metadata: Metadata = {
   title: {
@@ -51,7 +43,23 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={manrope.variable}>
+    <html lang="ru">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/manrope-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/manrope-cyrillic.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="flex min-h-screen flex-col bg-ink text-white">
         <SmoothScroll />
         <ScrollProgress />
