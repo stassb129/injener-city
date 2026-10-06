@@ -1,6 +1,6 @@
 import PageHero from '@/components/PageHero'
 import Reviews from '@/components/Reviews'
-import CallbackCta from '@/components/CallbackCta'
+import ContactCta from '@/components/ContactCta'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
@@ -16,7 +16,7 @@ export default function ReviewsPage() {
     <>
       <PageHero label="Отзывы о нас" title={<>Отзывы о нас</>} />
       <Reviews showHeading={false} />
-      <CallbackCta />
+      <ContactCta />
     </>
   )
 }

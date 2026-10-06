@@ -1,10 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { services } from '@/lib/services'
 import { articles } from '@/lib/content'
-import { useLeadModal } from '@/components/LeadModal'
+import { site } from '@/lib/site'
 import { fadeInUp, slideInLeft, slideInRight, staggerContainer, viewportOnce } from '@/lib/motion'
 
 function articleParagraphs(articleId?: string) {
@@ -37,7 +37,6 @@ function ServiceRow({
   service: (typeof services)[number]
   index: number
 }) {
-  const { openLeadModal } = useLeadModal()
   const reverse = index % 2 === 1
   const paragraphs = articleParagraphs(service.articleId)
   const articleTitle = articles.find((a) => a.id === service.articleId)?.title
@@ -88,17 +87,10 @@ function ServiceRow({
               </p>
             ))}
           </div>
-          <button
-            type="button"
-            onClick={() => openLeadModal(service.title)}
-            className="btn-accent mt-5 w-fit group"
-          >
-            Обратный звонок
-            <ArrowRight
-              size={15}
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </button>
+          <a href={site.phoneHref} className="btn-accent mt-5 w-fit">
+            <Phone size={15} className="shrink-0" />
+            Позвонить
+          </a>
         </motion.div>
       </div>
     </motion.article>

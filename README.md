@@ -34,7 +34,6 @@ npm run dev
 
 Переменные окружения (образец — `.env.example`) задаются в Vercel → Settings → Environment Variables:
 
-- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` — куда отправляются заявки с формы (`/api/lead`). Без них форма показывает ошибку и предлагает позвонить.
 - `NEXT_PUBLIC_YANDEX_VERIFICATION`, `NEXT_PUBLIC_GOOGLE_VERIFICATION` — коды подтверждения сайта в Яндекс.Вебмастере и Google Search Console.
 - `NEXT_PUBLIC_SITE_URL` — боевой адрес, по умолчанию `https://инженерные-сети.москва`.
 

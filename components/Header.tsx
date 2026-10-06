@@ -4,19 +4,16 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Clock, Menu, Phone, X } from 'lucide-react'
+import { Clock, Mail, Menu, Phone, X } from 'lucide-react'
 import { navLinks, site } from '@/lib/site'
 import { EASE } from '@/lib/motion'
 import { lockPageScroll, unlockPageScroll } from '@/lib/scroll-lock'
-import { useLeadModal } from '@/components/LeadModal'
 import Logo from '@/components/Logo'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
-  const { openLeadModal } = useLeadModal()
-
   const isActive = (href: string) => !href.includes('#') && pathname.startsWith(href)
 
   useEffect(() => {
@@ -83,13 +80,9 @@ export default function Header() {
             <Phone size={15} />
           </a>
 
-          <button
-            type="button"
-            onClick={() => openLeadModal('Шапка сайта')}
-            className="btn-accent hidden !px-3 !py-2 !text-[11px] sm:inline-flex"
-          >
-            Заявка
-          </button>
+          <a href={site.phoneHref} className="btn-accent hidden !px-3 !py-2 !text-[11px] sm:inline-flex">
+            Позвонить
+          </a>
 
           <button
             type="button"
@@ -148,20 +141,24 @@ export default function Header() {
                   <Phone size={14} className="shrink-0 text-accent" />
                   {site.phoneAlt}
                 </a>
+                {site.emails.map((email) => (
+                  <a
+                    key={email}
+                    href={`mailto:${email}`}
+                    className="flex items-center gap-2.5 text-sm text-white/70 transition-colors hover:text-accent"
+                  >
+                    <Mail size={14} className="shrink-0 text-accent" />
+                    {email}
+                  </a>
+                ))}
                 <span className="flex items-center gap-2.5 text-xs text-white/50">
                   <Clock size={14} className="text-accent" />
                   {site.schedule}
                 </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMenuOpen(false)
-                    openLeadModal('Мобильное меню')
-                  }}
-                  className="btn-accent mt-2 w-full"
-                >
-                  Обратный звонок
-                </button>
+                <a href={site.phoneHref} className="btn-accent mt-2 w-full">
+                  <Phone size={15} className="shrink-0" />
+                  Позвонить
+                </a>
               </div>
             </div>
           </motion.div>

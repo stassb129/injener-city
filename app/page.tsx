@@ -4,7 +4,7 @@ import Services from '@/components/Services'
 import Advantages from '@/components/Advantages'
 import Reviews from '@/components/Reviews'
 import AccordionArticles from '@/components/AccordionArticles'
-import CallbackCta from '@/components/CallbackCta'
+import ContactCta from '@/components/ContactCta'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -18,7 +18,7 @@ export default function HomePage() {
       <Advantages compact />
       <Reviews />
       <AccordionArticles defaultOpenId="intro" />
-      <CallbackCta />
+      <ContactCta />
     </>
   )
 }

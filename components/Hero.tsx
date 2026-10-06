@@ -2,14 +2,12 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { advantages, homeHero } from '@/lib/content'
 import { EASE, fadeInUp, slideInRight, staggerContainer } from '@/lib/motion'
-import { useLeadModal } from '@/components/LeadModal'
+import { site } from '@/lib/site'
 
 export default function Hero() {
-  const { openLeadModal } = useLeadModal()
-
   return (
     <section id="top" className="relative isolate overflow-hidden bg-ink section-y-tight pt-4 lg:pt-6">
       <MeshBackground />
@@ -40,13 +38,10 @@ export default function Hero() {
               variants={fadeInUp}
               className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:items-center"
             >
-              <button type="button" onClick={() => openLeadModal('Hero')} className="btn-accent group">
-                Обратный звонок
-                <ArrowRight
-                  size={15}
-                  className="transition-transform duration-200 group-hover:translate-x-0.5"
-                />
-              </button>
+              <a href={site.phoneHref} className="btn-accent group">
+                <Phone size={15} className="shrink-0" />
+                {site.phone}
+              </a>
               <a href="#services" className="btn-ghost">
                 Наши Услуги
               </a>

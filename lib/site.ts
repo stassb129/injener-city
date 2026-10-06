@@ -10,6 +10,7 @@ export const site = {
   phoneHref: 'tel:+74997148871',
   phoneAlt: '+7 (991) 127-71-07',
   phoneAltHref: 'tel:+79911277107',
+  emails: ['engineering-net@yandex.ru'],
   schedule: 'Пн-Пт с 10:00 до 19:00',
   address: 'г. Москва, ЖК Hill8, просп. Мира, д. 95, этаж 8, офис 143',
   postalAddress: {
@@ -18,7 +19,6 @@ export const site = {
     addressLocality: 'Москва',
     addressCountry: 'RU',
   },
-  callbackPromise: 'Перезвоним в течении 30 мин',
 } as const
 
 export const company = {

@@ -2,16 +2,13 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
+import { ArrowUpRight, Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { company, navLinks, servicesNav, site } from '@/lib/site'
 import { fadeInUp, staggerContainer, viewportOnce } from '@/lib/motion'
-import { useLeadModal } from '@/components/LeadModal'
 import Logo from '@/components/Logo'
 
-/** Подвал без дублирующего CTA-баннера — заявка уже есть в CallbackCta / шапке. */
 export default function Footer() {
   const year = new Date().getFullYear()
-  const { openLeadModal } = useLeadModal()
 
   return (
     <footer id="contacts" className="relative overflow-hidden border-t border-white/10 bg-ink-900 pt-12 pb-10 lg:pt-16 lg:pb-14">
@@ -34,9 +31,10 @@ export default function Footer() {
             <p className="mt-4 text-xs font-light leading-relaxed text-white/45 sm:text-sm">
               Инжиниринговая компания. Инженерные сети Москва.
             </p>
-            <button type="button" onClick={() => openLeadModal('Подвал сайта')} className="btn-accent mt-5">
-              Обратный звонок
-            </button>
+            <a href={site.phoneHref} className="btn-accent mt-5">
+              <Phone size={15} className="shrink-0" />
+              Позвонить
+            </a>
           </motion.div>
 
           <motion.nav variants={fadeInUp}>
@@ -93,6 +91,17 @@ export default function Footer() {
                   {site.phoneAlt}
                 </a>
               </li>
+              {site.emails.map((email) => (
+                <li key={email}>
+                  <a
+                    href={`mailto:${email}`}
+                    className="flex items-center gap-2.5 break-all text-xs text-white/70 transition-colors hover:text-accent sm:text-sm"
+                  >
+                    <Mail size={14} className="shrink-0 text-accent" />
+                    {email}
+                  </a>
+                </li>
+              ))}
               <li className="flex items-center gap-2.5 text-xs text-white/50 sm:text-sm">
                 <Clock size={14} className="shrink-0 text-accent" />
                 {site.schedule}

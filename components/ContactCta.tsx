@@ -1,15 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Phone } from 'lucide-react'
-import { callbackCopy } from '@/lib/content'
+import { Mail, Phone } from 'lucide-react'
+import { contactCopy } from '@/lib/content'
 import { site } from '@/lib/site'
 import { fadeInUp, viewportOnce } from '@/lib/motion'
-import { useLeadModal } from '@/components/LeadModal'
 
-/** Единственный крупный блок заявки на странице (не дублировать в Footer). */
-export default function CallbackCta() {
-  const { openLeadModal } = useLeadModal()
+export default function ContactCta() {
+  const [email] = site.emails
 
   return (
     <section className="section-y pt-0">
@@ -26,18 +24,20 @@ export default function CallbackCta() {
             <div className="min-w-0 max-w-xl">
               <span className="section-label">
                 <span className="h-px w-8 bg-accent" />
-                {callbackCopy.title}
+                {contactCopy.title}
               </span>
-              <h2 className="heading-section mt-2.5">{callbackCopy.text}</h2>
+              <h2 className="heading-section mt-2.5">{contactCopy.text}</h2>
+              <p className="mt-2 text-sm font-light text-white/50">{site.schedule}</p>
             </div>
             <div className="flex w-full shrink-0 flex-col gap-2.5 sm:w-auto sm:flex-row">
-              <a href={site.phoneHref} className="btn-ghost whitespace-nowrap">
-                <Phone size={15} className="shrink-0 text-accent" />
-                <span className="truncate">{site.phone}</span>
+              <a href={`mailto:${email}`} className="btn-ghost whitespace-nowrap">
+                <Mail size={15} className="shrink-0 text-accent" />
+                <span className="truncate">{email}</span>
               </a>
-              <button type="button" onClick={() => openLeadModal('Блок callback')} className="btn-accent whitespace-nowrap">
-                {callbackCopy.submit}
-              </button>
+              <a href={site.phoneHref} className="btn-accent whitespace-nowrap">
+                <Phone size={15} className="shrink-0" />
+                {site.phone}
+              </a>
             </div>
           </div>
         </motion.div>

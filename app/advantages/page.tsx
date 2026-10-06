@@ -1,7 +1,7 @@
 import PageHero from '@/components/PageHero'
 import Advantages from '@/components/Advantages'
 import AccordionArticles from '@/components/AccordionArticles'
-import CallbackCta from '@/components/CallbackCta'
+import ContactCta from '@/components/ContactCta'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
@@ -35,7 +35,7 @@ export default function AdvantagesPage() {
         defaultOpenId="intro"
         className="!pt-4 lg:!pt-5"
       />
-      <CallbackCta />
+      <ContactCta />
     </>
   )
 }

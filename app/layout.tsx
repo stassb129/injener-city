@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { LeadModalProvider } from '@/components/LeadModal'
 import CustomCursor from '@/components/CustomCursor'
 import SmoothScroll from '@/components/SmoothScroll'
 import ScrollProgress from '@/components/ScrollProgress'
@@ -75,6 +74,7 @@ const organizationJsonLd = {
   logo: `${site.url}/apple-touch-icon.png`,
   image: `${site.url}/og-image.png`,
   telephone: [site.phoneHref.replace('tel:', ''), site.phoneAltHref.replace('tel:', '')],
+  email: site.emails,
   taxID: company.inn,
   identifier: [
     { '@type': 'PropertyValue', propertyID: 'ОГРН', value: company.ogrn },
@@ -129,11 +129,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <ScrollProgress />
         <CustomCursor />
-        <LeadModalProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </LeadModalProvider>
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   )
