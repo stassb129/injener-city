@@ -1,13 +1,15 @@
-import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
 import ServicesDetail from '@/components/ServicesDetail'
 import AccordionArticles from '@/components/AccordionArticles'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Наши Услуги',
+export const metadata = pageMetadata({
+  title: 'Услуги: вентиляция, электрика, отопление',
   description:
-    'Вентиляция-Кондиционирование. Проектирование, Монтаж, Пуско-наладка, Обслуживание Лаборатория. Электроснабжение. ГВС, ХВС, Отопление, Канализация.',
-}
+    'Вентиляция и кондиционирование, электроснабжение и слаботочные сети, отопление, ГВС, ХВС и канализация в Москве. Проектирование, монтаж, пуско-наладка, обслуживание.',
+  path: '/services',
+  ogTitle: 'Услуги по инженерным сетям в Москве',
+})
 
 export default function ServicesPage() {
   return (

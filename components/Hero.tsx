@@ -77,8 +77,8 @@ export default function Hero() {
             />
             <div className="relative z-10 overflow-hidden rounded-xl border border-white/10 shadow-glass">
               <Image
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
-                alt="Проектирование и монтаж инженерных сетей"
+                src="https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=80"
+                alt="Инженерные коммуникации: трубопроводы и насосное оборудование"
                 width={1000}
                 height={750}
                 priority

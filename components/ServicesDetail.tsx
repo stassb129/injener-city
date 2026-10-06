@@ -60,6 +60,8 @@ function ServiceRow({
           <img
             src={service.image}
             alt={service.imageAlt}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div

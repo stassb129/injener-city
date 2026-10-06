@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { articles, type Article } from '@/lib/content'
 import { EASE, fadeInUp, staggerContainer, viewportOnce } from '@/lib/motion'
@@ -40,18 +40,18 @@ function ArticleTabs({ tabs }: { tabs: NonNullable<Article['tabs']> }) {
           </button>
         ))}
       </div>
-      <AnimatePresence mode="wait">
+      {tabs.map((tab) => (
         <motion.div
-          key={current.id}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
+          key={tab.id}
+          hidden={tab.id !== current.id}
+          initial={false}
+          animate={tab.id === current.id ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
           transition={{ duration: 0.25, ease: EASE }}
           className="mt-5"
         >
-          <Paragraphs items={current.paragraphs} />
+          <Paragraphs items={tab.paragraphs} />
         </motion.div>
-      </AnimatePresence>
+      ))}
     </div>
   )
 }
@@ -81,27 +81,25 @@ function AccordionItem({
           className={`mt-1 shrink-0 text-accent transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
         />
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: EASE }}
-            className="overflow-hidden"
-          >
-            <div className="border-t border-white/10 px-5 pb-6 pt-4 sm:px-6">
-              <Paragraphs items={article.paragraphs} />
-              {'tabs' in article && article.tabs && <ArticleTabs tabs={article.tabs} />}
-              {'afterTabs' in article && article.afterTabs && (
-                <div className="mt-5">
-                  <Paragraphs items={article.afterTabs} />
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Текст всегда в DOM, чтобы поисковики индексировали свёрнутые статьи */}
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+        {...(open ? {} : ({ inert: '' } as object))}
+      >
+        <div className="overflow-hidden">
+          <div className="border-t border-white/10 px-5 pb-6 pt-4 sm:px-6">
+            <Paragraphs items={article.paragraphs} />
+            {'tabs' in article && article.tabs && <ArticleTabs tabs={article.tabs} />}
+            {'afterTabs' in article && article.afterTabs && (
+              <div className="mt-5">
+                <Paragraphs items={article.afterTabs} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

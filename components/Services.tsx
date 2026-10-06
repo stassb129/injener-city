@@ -62,14 +62,16 @@ export default function Services() {
 }
 
 function ServiceCard({ service }: { service: (typeof services)[number] }) {
-  const { number, title, href, image, articleId } = service
+  const { number, title, href, image, imageAlt, articleId } = service
 
   const cardInner = (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={image}
-        alt={title}
+        alt={imageAlt}
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
       />
       <div

@@ -1,14 +1,16 @@
-import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
 import Advantages from '@/components/Advantages'
 import AccordionArticles from '@/components/AccordionArticles'
 import CallbackCta from '@/components/CallbackCta'
-import { advantages } from '@/lib/content'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Преимущества',
-  description: advantages.map((item) => item.title).join(', '),
-}
+  description:
+    'Почему заказывают инженерные сети у нас: опыт, оптимальные технические решения, гарантия качества работ и гибкая система оплаты. Москва.',
+  path: '/advantages',
+  ogTitle: 'Преимущества компании «Инженерные сети»',
+})
 
 export default function AdvantagesPage() {
   return (

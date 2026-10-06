@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
-import { navLinks, servicesNav, site } from '@/lib/site'
+import { company, navLinks, servicesNav, site } from '@/lib/site'
 import { fadeInUp, staggerContainer, viewportOnce } from '@/lib/motion'
 import { useLeadModal } from '@/components/LeadModal'
 import Logo from '@/components/Logo'
@@ -105,13 +105,25 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 pb-2 text-xs text-white/35 sm:flex-row lg:mt-12">
+        <div className="mt-10 grid gap-x-8 gap-y-1.5 border-t border-white/10 pt-6 text-xs text-white/45 sm:grid-cols-2 sm:text-sm lg:mt-12 lg:grid-cols-[auto_auto_1fr]">
+          <div className="space-y-1.5">
+            <p className="font-medium text-white/70">{company.legalName}</p>
+            <p>ОГРН: {company.ogrn}</p>
+          </div>
+          <div className="space-y-1.5">
+            <p>ИНН: {company.inn}</p>
+            <p>КПП: {company.kpp}</p>
+          </div>
+          <p className="sm:col-span-2 lg:col-span-1">Адрес: {site.address}</p>
+        </div>
+
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 pb-2 text-xs text-white/35 sm:flex-row">
           <span>
             © {year} {site.name}. Все права защищены.
           </span>
-          <a href="#" className="transition-colors hover:text-accent">
+          <Link href="/privacy" className="transition-colors hover:text-accent">
             Политика конфиденциальности
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

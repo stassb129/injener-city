@@ -5,35 +5,96 @@ import { LeadModalProvider } from '@/components/LeadModal'
 import CustomCursor from '@/components/CustomCursor'
 import SmoothScroll from '@/components/SmoothScroll'
 import ScrollProgress from '@/components/ScrollProgress'
+import { company, site } from '@/lib/site'
+import { services } from '@/lib/services'
 import './globals.css'
 
+const defaultDescription =
+  'Инженерные сети в Москве — проектирование, монтаж, пуско-наладка и обслуживание вентиляции, кондиционирования, электроснабжения, отопления, ГВС, ХВС и канализации.'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: 'Инженерные сети | Вентиляция, электромонтаж, системы отопления',
-    template: '%s | Инженерные сети',
+    default: 'Инженерные сети в Москве — проектирование и монтаж',
+    template: '%s | Инженерные сети Москва',
   },
-  description:
-    'Инженерные сети в Москве — монтаж и проектирование вентиляции, кондиционирования, электроснабжения, отопления, ГВС, ХВС и канализации.',
+  description: defaultDescription,
+  applicationName: site.name,
   keywords: [
     'инженерные сети Москва',
-    'вентиляция',
-    'кондиционирование',
+    'монтаж инженерных сетей',
+    'проектирование инженерных систем',
+    'вентиляция и кондиционирование',
     'электромонтаж',
     'отопление',
     'водоснабжение',
     'канализация',
   ],
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'Инженерные сети в Москве — монтаж и проектирование',
-    description:
-      'Вентиляция, электроснабжение, отопление, ГВС, ХВС, канализация. Проектирование, монтаж и обслуживание.',
-    locale: 'ru_RU',
     type: 'website',
+    locale: 'ru_RU',
+    url: '/',
+    siteName: site.name,
+    title: 'Инженерные сети в Москве — проектирование и монтаж',
+    description:
+      'Вентиляция, кондиционирование, электроснабжение, отопление, ГВС, ХВС, канализация. Проектирование, монтаж и обслуживание.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Инженерные сети в Москве' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
+  formatDetection: { telephone: false },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
   },
   icons: {
-    icon: [{ url: '/logo.svg', type: 'image/svg+xml' }],
-    shortcut: '/logo.svg',
-    apple: '/logo.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/logo.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+}
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site.url}/#organization`,
+  name: site.name,
+  legalName: company.fullLegalName,
+  description: defaultDescription,
+  url: site.url,
+  logo: `${site.url}/apple-touch-icon.png`,
+  image: `${site.url}/og-image.png`,
+  telephone: [site.phoneHref.replace('tel:', ''), site.phoneAltHref.replace('tel:', '')],
+  taxID: company.inn,
+  identifier: [
+    { '@type': 'PropertyValue', propertyID: 'ОГРН', value: company.ogrn },
+    { '@type': 'PropertyValue', propertyID: 'КПП', value: company.kpp },
+  ],
+  address: { '@type': 'PostalAddress', ...site.postalAddress },
+  areaServed: { '@type': 'City', name: 'Москва' },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '10:00',
+    closes: '19:00',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Услуги',
+    itemListElement: services.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: s.title.replace(/\.$/, ''), url: `${site.url}${s.href}` },
+    })),
   },
 }
 
@@ -58,6 +119,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
       <body className="flex min-h-screen flex-col bg-ink text-white">

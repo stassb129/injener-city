@@ -11,6 +11,7 @@ import {
   type FormEvent,
   type ReactNode,
 } from 'react'
+import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCircle2, Loader2, Phone, User, X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
@@ -57,13 +58,14 @@ type LeadModalProps = {
   onClose: () => void
 }
 
-type Status = 'idle' | 'submitting' | 'success'
+type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 function LeadModal({ open, source, onClose }: LeadModalProps) {
   const titleId = useId()
   const nameRef = useRef<HTMLInputElement>(null)
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('+7')
+  const [website, setWebsite] = useState('')
   const [errors, setErrors] = useState<{ name?: string; phone?: string }>({})
   const [status, setStatus] = useState<Status>('idle')
 
@@ -72,6 +74,7 @@ function LeadModal({ open, source, onClose }: LeadModalProps) {
 
     setName('')
     setPhone('+7')
+    setWebsite('')
     setErrors({})
     setStatus('idle')
     lockPageScroll()
@@ -103,10 +106,22 @@ function LeadModal({ open, source, onClose }: LeadModalProps) {
     if (!validate()) return
 
     setStatus('submitting')
-    await new Promise((resolve) => setTimeout(resolve, 700))
-    // eslint-disable-next-line no-console
-    console.log('[lead]', { name: name.trim(), phone, source })
-    setStatus('success')
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone,
+          source,
+          page: window.location.pathname,
+          website,
+        }),
+      })
+      setStatus(response.ok ? 'success' : 'error')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -223,6 +238,26 @@ function LeadModal({ open, source, onClose }: LeadModalProps) {
                     />
                   </Field>
 
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                  />
+
+                  {status === 'error' && (
+                    <p role="alert" className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-300">
+                      Не удалось отправить заявку. Позвоните нам:{' '}
+                      <a href={site.phoneHref} className="font-semibold underline">
+                        {site.phone}
+                      </a>
+                    </p>
+                  )}
+
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
@@ -239,7 +274,10 @@ function LeadModal({ open, source, onClose }: LeadModalProps) {
                   </button>
 
                   <p className="text-center text-[11px] font-light leading-relaxed text-white/35">
-                    {callbackCopy.privacy}
+                    {callbackCopy.privacy}{' '}
+                    <Link href="/privacy" onClick={onClose} className="underline transition-colors hover:text-accent">
+                      Политикой конфиденциальности
+                    </Link>
                   </p>
                 </form>
               )}

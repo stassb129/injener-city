@@ -17,8 +17,8 @@ export const services: Service[] = [
     title: 'Вентиляция-Кондиционирование.',
     articleId: 'ventilation',
     image:
-      'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1400&q=80',
-    imageAlt: 'Вентиляция-Кондиционирование',
+      'https://images.unsplash.com/photo-1759646827242-cf09e30709aa?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Вентиляционная установка с воздуховодами под потолком',
     href: '/services#ventilation',
   },
   {
@@ -28,7 +28,7 @@ export const services: Service[] = [
     articleId: 'intro',
     image:
       'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80',
-    imageAlt: 'Проектирование, Монтаж, Пуско-наладка, Обслуживание Лаборатория',
+    imageAlt: 'Инженер работает над проектными чертежами',
     href: '/services#engineering',
   },
   {
@@ -38,7 +38,7 @@ export const services: Service[] = [
     articleId: 'electrical',
     image:
       'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1400&q=80',
-    imageAlt: 'Электроснабжение. (Силовая электрика, Слаботочные сети)',
+    imageAlt: 'Электромонтажник в каске подключает электрощит',
     href: '/services#electrical',
   },
   {
@@ -47,8 +47,8 @@ export const services: Service[] = [
     title: 'ГВС, ХВС, Отопление, Канализация.',
     articleId: 'heating',
     image:
-      'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=80',
-    imageAlt: 'ГВС, ХВС, Отопление, Канализация',
+      'https://images.unsplash.com/photo-1650551182956-47efa0f90b64?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Трубопроводы отопления и водоснабжения с манометрами, насосом и запорной арматурой',
     href: '/services#plumbing',
   },
 ]
