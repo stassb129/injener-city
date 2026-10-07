@@ -40,3 +40,5 @@ npm run dev
 `robots.txt`, `sitemap.xml` и манифест генерируются автоматически. На preview-деплоях Vercel `robots.txt` закрывает сайт от индексации.
 
 Иконки и OG-картинка пересобираются скриптом `scripts/generate-icons.ps1`.
+
+Деплой на свой сервер через Docker/Coolify описан в [DEPLOYMENT.md](./DEPLOYMENT.md).

@@ -51,8 +51,9 @@ export const metadata: Metadata = {
   },
   formatDetection: { telephone: false },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
-    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+    // Пустая строка из Docker build-arg не должна давать пустой meta-тег
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || undefined,
   },
   icons: {
     icon: [

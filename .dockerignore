@@ -1,0 +1,34 @@
+# Зависимости и артефакты сборки — пересобираются внутри образа
+node_modules
+.next
+out
+build
+coverage
+*.tsbuildinfo
+
+# Git и деплой-конфиги, не нужные для сборки
+.git
+.gitignore
+.vercel
+Dockerfile
+.dockerignore
+
+# Локальные переменные окружения (секреты не должны попадать в образ)
+.env
+.env.*
+!.env.example
+
+# Документация и вспомогательные скрипты
+README.md
+DEPLOYMENT.md
+scripts
+
+# Логи, IDE, ОС
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vscode
+.idea
+.cursor
+.DS_Store
+Thumbs.db

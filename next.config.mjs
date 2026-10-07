@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Самодостаточная сборка для Docker/Coolify; Vercel эту опцию поддерживает и собирает как обычно
+  output: 'standalone',
   async headers() {
     return [
       {
